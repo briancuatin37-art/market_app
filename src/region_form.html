@@ -1,0 +1,25 @@
+<h2>Registrar Región</h2>
+<form action="add_region.php" method="POST">
+  <label>Nombre:</label>
+  <input type="text" name="name" required><br>
+
+  <label>Abreviatura:</label>
+  <input type="text" name="abbrev" maxlength="5" required><br>
+
+  <label>Código:</label>
+  <input type="text" name="code" maxlength="10" required><br>
+
+  <label>País:</label>
+  <select name="country_id" required>
+    <option value="">Seleccione un país</option>
+    <?php
+    include 'db.php';
+    $countries = $conn->query("SELECT * FROM countries");
+    while ($row = $countries->fetch(PDO::FETCH_ASSOC)) {
+        echo "<option value='{$row['id']}'>{$row['name']}</option>";
+    }
+    ?>
+  </select><br>
+
+  <button type="submit">Registrar</button>
+</form>

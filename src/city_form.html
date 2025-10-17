@@ -1,0 +1,25 @@
+<h2>Registrar Ciudad</h2>
+<form action="add_city.php" method="POST">
+  <label>Nombre:</label>
+  <input type="text" name="name" required><br>
+
+  <label>Abreviatura:</label>
+  <input type="text" name="abbrev" maxlength="5" required><br>
+
+  <label>Código:</label>
+  <input type="text" name="code" maxlength="10" required><br>
+
+  <label>Región:</label>
+  <select name="region_id" required>
+    <option value="">Seleccione una región</option>
+    <?php
+    include 'db.php';
+    $regions = $conn->query("SELECT * FROM regions");
+    while ($row = $regions->fetch(PDO::FETCH_ASSOC)) {
+        echo "<option value='{$row['id']}'>{$row['name']}</option>";
+    }
+    ?>
+  </select><br>
+
+  <button type="submit">Registrar</button>
+</form>
